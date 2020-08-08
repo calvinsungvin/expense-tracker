@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="row">
+    <div class="form-group col-6 mx-auto mt-4">
+      <select class="form-control" id="category" name="category" onchange="location = this.value;">
+        <option value="/">全部</option>
+        <option value="/filter/交通出行" {{#equal params '交通出行'}}selected{{/equal}}>交通出行</option>
+        <option value="/filter/餐飲食品" {{#equal params '餐飲食品'}}selected{{/equal}}>餐飲食品</option>
+        <option value="/filter/休閒娛樂" {{#equal params '休閒娛樂'}}selected{{/equal}}>休閒娛樂</option>
+        <option value="/filter/家居物業" {{#equal params '家居物業'}}selected{{/equal}}>家居物業</option>
+        <option value="/filter/其他" {{#equal params '其他'}}selected{{/equal}}>其他</option>
+      </select>
+      <div class="totalAmount mt-4">
+        <span style="font-size:larger;">總金額:</span>
+        <p class="text-center" style="font-size: 80px; color:orange; letter-spacing: 8px">{{totalAmount}}</p>
+      </div>
+      <ul class="list-group mt-4">
+        {{#each record}}
+        <li class="list-group-item d-lg-flex">
+          <div class="record-list d-flex col-lg-8">
+            <div class="icon my-auto" style="width: 60px;">
+              {{#equal this.category '家居物業'}}<i class="fas fa-home"
+                style="font-size: 45px; color:cadetblue"></i>{{/equal}}
+              {{#equal this.category '交通出行'}}<i class="fas fa-shuttle-van"
+                style="font-size: 45px; color:lightslategrey"></i>{{/equal}}
+              {{#equal this.category '休閒娛樂'}}<i class="fas fa-grin-beam"
+                style="font-size: 45px; color:salmon"></i>{{/equal}}
+              {{#equal this.category '餐飲食品'}}<i class="fas fa-utensils"
+                style="font-size: 45px; color:mediumvioletred"></i>{{/equal}}
+              {{#equal this.category '其他'}}<i class="fas fa-pen" style="font-size: 45px; color:orange"></i>{{/equal}}
+            </div>
+            <div class="nameAndDate ml-0" style="width: 190px;">
+              <div class="name" style="font-size: larger;">{{this.name}}</div>
+              <small class="date">{{this.date}}</small>
+            </div>
+            <div class="amount my-auto ml-3" style="font-size: larger;">${{this.amount}}</div>
+          </div>
+          <div class="button my-auto text-center text-lg-right col-lg-4 p-0">
+            <a href="/{{this._id}}/edit" class="btn btn-success">修改</a>
+            <form action="/{{ this._id }}?_method=DELETE" method="POST" style="display: inline-block;">
+              <!-- Button trigger modal -->
+              <button type="button" class="btn btn-danger" data-toggle="modal"
+                data-target="#exampleModalCenter{{ this._id }}">
+                刪除
+              </button>
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModalCenter{{ this._id }}" tabindex="-1" role="dialog"
+                aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalCenterTitle">刪除支出項目</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body text-center">
+                      刪除【{{ this.name }}】此筆支出
+                    </div>
+                    <div class="modal-footer">
+                      <button type="submit" class="btn btn-primary">確認刪除</button>
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </li>
+        {{/each}}
+      </ul>
+      <a href="/new" class="btn btn-primary btn-block mt-2">新增支出</a>
+    </div>
+  </div>
+</div>
