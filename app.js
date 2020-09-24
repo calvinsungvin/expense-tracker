@@ -28,6 +28,11 @@ app.use(express.static('public'))
 app.use(methodOverride('_method'))
 
 userPassport(app)
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  next()
+})
 
 // showing pages
 app.use(routes)
