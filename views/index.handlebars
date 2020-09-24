@@ -1,4 +1,126 @@
-<div class="container">
+<div class="container-fluid border my-0 rounded-lg ">
+    <div class="d-flex justify-content-start align-self-center mt-3 mr-4">
+        {{!-- <form method="GET" action="/filter">
+            <div class="filter row align-items-center">
+                <div class="filter-category mb-3 mr-3">
+                    <select class="form-control" id="filter-category" name="categories" onchange="submit()">
+                        <option value="">全部支出</option>
+                        {{#each categories}}
+                        <option value="{{this}}">{{this.categoryName}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div class="filter-month mb-3">
+                    <select class="form-control" id="filter-category" name="categories" onchange="submit()">
+                        <option value="">全部月份</option>
+                        {{#each categories}}
+                        <option value="{{this}}">{{this.categoryName}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+        </form> --}}
+        {{!-- 支出類別 --}}
+        <div class="dropdown">
+            <button class="btn btn-info dropdown-toggle btn-lg rounded-pill" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-filter ml-1"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {{#each categories}}
+                <a href="/filter/{{this._id}}" class="dropdown-item"><i
+                        class="{{this.categoryIcon}} glyphicon glyphicon-check fa-2x"></i>
+                    {{this.categoryName}}</a>
+                {{/each}}
+            </div>
+        </div>
+        {{!-- 支出月份 --}}
+        <div class="dropdown ml-3">
+            <button class="btn btn-warning dropdown-toggle btn-lg rounded-pill" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-calendar-alt"></i>
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                {{#each categories}}
+                <a href="/filter/{{this._id}}" class="dropdown-item">{{this.categoryName}}</a>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-around mt-3">
+        <h4>Total:</h4>
+        <h1 class="text-danger">{{totalAmount}}</h1>
+        <span class="d-flex align-items-center">TWD</pan>
+    </div>
+    {{!-- <hr> --}}
+    <table class="table table-striped">
+        <thead align="center">
+            <tr>
+                <th>Item</th>
+                <th>Merchant</th>
+                <th>Cost</th>
+                <th>Management</th>
+            </tr>
+        </thead>
+        <tbody align="center">
+            {{#each records}}
+            <tr>
+                <td style="vertical-align: middle"><i class="
+                    {{#checkIfSam this.category '家居物業'}} fas fa-home fa-2x{{/checkIfSam}}
+                    {{#checkIfSam this.category '交通出行'}} fas fa-shuttle-van fa-2x{{/checkIfSam}}
+                    {{#checkIfSam this.category '休閒娛樂'}} fas fa-grin-beam fa-2x{{/checkIfSam}}
+                    {{#checkIfSam this.category '餐飲食品'}} fas fa-utensils fa-2x{{/checkIfSam}}
+                    {{#checkIfSam this.category '其他'}} fas fa-pen fa-2x{{/checkIfSam}}
+                    "></i>
+                    <strong> {{this.name}}</strong>
+                    <br>
+                    <small>{{this.date}}</small></td>
+                {{!-- <td style="vertical-align: middle"><small><strong>{{this.date}}</strong></small></td> --}}
+                <td style="vertical-align: middle"><strong>{{this.merchant}}</strong></td>
+                <td style="vertical-align: middle">
+                    <h5><strong>{{this.amount}}</strong></h6>
+                </td>
+                <td style="vertical-align: middle">
+                    <a class="btn" href="/records/{{this._id}}/edit">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal{{this._id}}"><i
+                            class="fas fa-trash" style="display: inline;"></i></button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal{{this._id}}" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">提醒</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    是否確定刪除『{{this.date}}，{{this.name}}』的資料
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                                    <form action="/records/{{this._id}}/?_method=DELETE" method="POST"
+                                        style="display: inline;">
+                                        <button type="submit" class="btn btn-primary">確定</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <a href="/records/new" style="text-decoration: none">
+        <button type="submit" class="btn btn-success btn-lg btn-block mt-2 mb-3">Add<i
+                class="fas fa-plus ml-1"></i></button>
+    </a>
+</div>
+
+{{!-- <div class="container">
   <div class="row">
     <div class="form-group col-6 mx-auto mt-4">
       <select class="form-control" id="category" name="category" onchange="location = this.value;">
@@ -71,4 +193,4 @@
       <a href="/new" class="btn btn-primary btn-block mt-2">新增支出</a>
     </div>
   </div>
-</div>
+</div> --}}

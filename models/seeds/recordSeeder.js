@@ -16,24 +16,28 @@ const SEED_EXPENSE = [
     {
         name: "早餐",
         category: "餐飲食品",
+        merchant: "美之城",
         date: "2020-08-03",
         amount: "80",
     },
     {
         name: "健身",
         category: "休閒娛樂",
+        merchant: "World Gym",
         date: "2020-08-03",
         amount: "50",
     },
     {
         name: "房租",
         category: "家居物業",
+        merchant: "hot landlord",
         date: "2020-08-03",
         amount: "25000",
     },
     {
         name: "搭公車",
         category: "交通出行",
+        merchant: "Taipei Government",
         date: "2020-08-03",
         amount: "36",
     }

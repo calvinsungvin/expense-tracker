@@ -1,4 +1,68 @@
-<div class="container">
+<div class="container-fluid border my-0 rounded-lg py-5">
+    <div class="row">
+        <div class="col-12 col-lg-10 col-xl-8 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <form method="POST" action="/records/{{record._id}}?_method=PUT">
+                        <div class="form-group form-row">
+                            <label for="name" class="col-md-4 col-form-label">
+                                名稱<small class="form-text text-danger">(必填*)</small>
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" placeholder="name" name="name" class="form-control" value="{{record.name}}" required>
+                            </div>
+                        </div>
+                        <div class="form-group form-row">
+                            <label for="date" class="col-md-4 col-form-label">
+                                日期<small class="form-text text-danger">(必填*)</small>
+                            </label>
+                            <div class="col-md-8">
+                                <input type="date" class="form-control" placeholder="2020-08-05" aria-label="date"
+                                    aria-describedby="basic-addon2" name="date" value="{{record.date}}" required>
+                            </div>
+                        </div>
+                        <div class="form-group form-row">
+                            <label for="merchant" class="col-md-4 col-form-label">
+                                商家
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" placeholder="merchant" name="merchant" class="form-control" value="{{record.merchant}}">
+                            </div>
+                        </div>
+                        <div class="form-group form-row">
+                            <label for="category" class="col-md-4 col-form-label">類別<small
+                                    class="form-text text-danger">(必填*)</small></label>
+                            <div class="col-md-8">
+                                <select id="category" class="form-control" name="category" required>
+                                    <option>{{record.category}}</option>
+                                    <option value="家居物業">家居物業</option>
+                                    <option value="交通出行">交通出行</option>
+                                    <option value="休閒娛樂">休閒娛樂</option>
+                                    <option value="餐飲食品">餐飲食品</option>
+                                    <option value="其他">其他</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group form-row">
+                            <label for="amount" class="col-md-4 col-form-label">
+                                金額<small class="text-danger form-text">(必填*)</small>
+                            </label>
+                            <div class="col-md-8">
+                                <input type="text" placeholder="amount" name="amount" class="form-control" value="{{record.amount}}" required>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button class="btn btn-success" type="submit">送出資料</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{{!-- <div class="container">
   <div class="row">
     <div class="form-group col-6 mx-auto mt-4">
       <div class="title ">
@@ -21,11 +85,19 @@
             <input type="date" class="form-control" id="date" name="date" value="{{record.date}}" required>
           </div>
         </div>
-
+        <div class="form-group form-row">
+          <label for="merchant" class="col-md-4 col-form-label">
+            商家
+          </label>
+          <div class="col-md-8">
+            <input type="text" placeholder="merchant" name="merchant" class="form-control" value="{{record.merchant}}">
+          </div>
+        </div>
         <div class="form-group row">
           <label for="category" class="col-sm-2 col-form-label">類別*: </label>
           <div class="col-sm-10">
             <select class="form-control" id="category" name="category">
+              <option {{#equal category '交通出行'}}selected{{/equal}}>{{record.category}}</option>
               <option {{#equal category '交通出行'}}selected{{/equal}}>交通出行</option>
               <option {{#equal category '餐飲食品'}}selected{{/equal}}>餐飲食品</option>
               <option {{#equal category '休閒娛樂'}}selected{{/equal}}>休閒娛樂</option>
@@ -48,4 +120,4 @@
 
     </div>
   </div>
-</div>
+</div> --}}

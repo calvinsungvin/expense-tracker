@@ -5,6 +5,10 @@ const recordSchema = new Schema({
       type: String, 
       required: true
     },
+  merchant: {
+      type: String,
+      required: false
+  },
   category: { 
       type: String,
       required: true 

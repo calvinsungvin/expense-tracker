@@ -2,15 +2,15 @@ const express = require('express')
 const router = express.Router()
 const Record = require('../../models/record')
 const Category = require('../../models/category')
-// const handlebars = require("handlebars")
+const handlebars = require("handlebars")
 
-// handlebars.registerHelper('equal', (a, b, options) => {
-//     if (a === b) {
-//       return options.fn(this)
-//     } else {
-//       return options.inverse(this)
-//     }
-//   })
+handlebars.registerHelper('checkIfSam', (a, b, options) => {
+    if (a === b) {
+      return options.fn(this)
+    } else {
+      return options.inverse(this)
+    }
+  })
 
 //index page
 router.get('/', (req, res) => {
