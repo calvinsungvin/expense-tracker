@@ -1,45 +1,71 @@
+const bcrypt = require('bcryptjs')
 if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
+    require('dotenv').config()
 }
-const Record = require('../record.js')
-const db = require('../../config/mongoose.js')
+const Record = require('../record')
+const User = require('../user')
+const db = require('../../config/mongoose')
+
+const SEED_USER = {
+    name: 'User',
+    email: 'user@example.com',
+    password: '123456'
+}
+
+const SEED_EXPENSE = [
+    {
+        name: "早餐",
+        category: "餐飲食品",
+        date: "2020-08-03",
+        amount: "80",
+    },
+    {
+        name: "健身",
+        category: "休閒娛樂",
+        date: "2020-08-03",
+        amount: "50",
+    },
+    {
+        name: "房租",
+        category: "家居物業",
+        date: "2020-08-03",
+        amount: "25000",
+    },
+    {
+        name: "搭公車",
+        category: "交通出行",
+        date: "2020-08-03",
+        amount: "36",
+    }
+]
 
 db.once('open', () => {
-  Record.create(
-    {
-      name: '公車',
-      category: '交通出行',
-      date: '2020-07-16',
-      amount: 50
-    },
-    {
-      name: '午餐',
-      category: '餐飲食品',
-      date: '2020-07-15',
-      amount: 60
-    },
-    {
-      name: '電動',
-      category: '休閒娛樂',
-      date: '2020-07-17',
-      amount: 500
-    },
-    {
-      name: '掃把',
-      category: '家居物業',
-      date: '2020-07-17',
-      amount: 100
-    },
-    {
-      name: '糖果',
-      category: '其他',
-      date: '2020-07-17',
-      amount: 100
-    }
-  )
-    .then(() => {
-      db.close()
-      console.log('Record done!')
-    })
-    .catch(error => console.log(error))
+    bcrypt
+        .genSalt(10)
+        .then(salt => bcrypt.hash(SEED_USER.password, salt))
+        .then(hash => User.create({
+            name: SEED_USER.name,
+            email: SEED_USER.email,
+            password: hash
+        }))
+        .then(user => {
+            const userId = user._id
+            return Promise.all(Array.from(
+                { length: 4 },
+                (_, i) =>
+                    Record.create({
+                        name: SEED_EXPENSE[i].name,
+                        category: SEED_EXPENSE[i].category,
+                        date: SEED_EXPENSE[i].date,
+                        amount: SEED_EXPENSE[i].amount,
+                        userId
+                    })
+            ))
+
+        })
+        .then(() => {
+            console.log('recordSeeder done!')
+            // db.close()
+            process.exit()
+        })
 })
