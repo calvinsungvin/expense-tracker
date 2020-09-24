@@ -31,16 +31,37 @@ const SEED_EXPENSE = [
         name: "房租",
         category: "家居物業",
         merchant: "hot landlord",
-        date: "2020-08-03",
+        date: "2020-08-22",
         amount: "25000",
     },
     {
         name: "搭公車",
         category: "交通出行",
         merchant: "Taipei Government",
-        date: "2020-08-03",
+        date: "2020-08-05",
         amount: "36",
-    }
+    },
+    {
+        name: "午餐",
+        category: "餐飲食品",
+        merchant: "錢都",
+        date: "2020-08-03",
+        amount: "250",
+    },
+    {
+        name: "飲料餐",
+        category: "餐飲食品",
+        merchant: "星巴克",
+        date: "2020-07-25",
+        amount: "120",
+    },
+    {
+        name: "晚餐",
+        category: "餐飲食品",
+        merchant: "藏壽司",
+        date: "2020-07-29",
+        amount: "320",
+    },
 ]
 
 db.once('open', () => {
@@ -55,7 +76,7 @@ db.once('open', () => {
         .then(user => {
             const userId = user._id
             return Promise.all(Array.from(
-                { length: 4 },
+                { length: 7 },
                 (_, i) =>
                     Record.create({
                         name: SEED_EXPENSE[i].name,
