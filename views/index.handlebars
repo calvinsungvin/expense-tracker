@@ -1,17 +1,15 @@
 <div class="container-fluid border my-0 rounded-lg ">
-    {{!-- <form method="GET" action="/filter"> --}}
-    <div class="d-flex justify-content-start align-self-center mt-3 mr-4">
+    <div class="d-flex justify-content-start align-self-center mt-3 mr-4 mb-3">
         <div class="dropdown">
             <button class="btn btn-info dropdown-toggle btn-lg rounded-pill" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-filter ml-1"></i>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 {{#each categories}}
-                <a href="/filter?category={{this.categoryEnglishName}}&month={{monthQuery}}" class="dropdown-item">
+                <a href="/filter?category={{this.categoryEnglishName}}&month={{#if ../monthQuery}}{{../monthQuery}}{{/if}}" class="dropdown-item">
                     <i class="{{this.categoryIcon}}"></i> {{this.categoryName}}
                 </a>
                 {{/each}}
-                <a href="/filter?category=123&month={{monthQuery}}" class="dropdown-item">測試用</a>
             </div>
         </div>
         <div class="dropdown ml-3">
@@ -20,14 +18,14 @@
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 {{#each existYM}}
-                <a href="/filter?month={{this}}&category={{categoryQuery}}" class="dropdown-item text-center">
+                <a href="/filter?month={{this}}&category={{#if ../categoryQuery}}{{../categoryQuery}}{{/if}}" class="dropdown-item text-center">
                     【 {{this}} 】
                 </a>
                 {{/each}}
             </div>
         </div>
     </div>
-    {{!-- </form> --}}
+    {{> message}}
     <div class="d-flex justify-content-around mt-3">
         <h4>Total:</h4>
         <h1 class="text-danger">{{totalAmount}}</h1>
@@ -59,7 +57,6 @@
                     <strong> {{this.name}}</strong>
                     <br>
                     <small>{{this.date}}</small></td>
-                {{!-- <td style="vertical-align: middle"><small><strong>{{this.date}}</strong></small></td> --}}
                 <td style="vertical-align: middle"><strong>{{this.merchant}}</strong></td>
                 <td style="vertical-align: middle">
                     <h5><strong>{{this.amount}}</strong></h6>
