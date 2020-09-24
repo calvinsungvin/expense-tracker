@@ -7,7 +7,8 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 {{#each categories}}
                 <a href="/filter?category={{this.categoryEnglishName}}&month={{#if ../monthQuery}}{{../monthQuery}}{{/if}}" class="dropdown-item">
-                    <i class="{{this.categoryIcon}}"></i> {{this.categoryName}}
+                    <i class="{{this.categoryIcon}}"></i>
+                    {{this.categoryName}}
                 </a>
                 {{/each}}
             </div>
