@@ -5,6 +5,10 @@ const categorySchema = new Schema({
         type: String,
         require: true
     },
+    categoryEnglishName: {
+        type: String,
+        require: true
+    },
     categoryIcon: {
         type: String,
         required: false
